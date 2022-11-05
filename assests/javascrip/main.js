@@ -12,6 +12,7 @@ const nextBtn = $('.music-control__icon4');
 const replayBtn = $('.music-control__icon5');
 const progress = $('#progress');
 const remainTime = $('.music-control__progress-time-start');
+const durationTime = $('.music-control__progress-time-duration');
 const playList = $('.option-all__songs-list');
 const sliderItems = $$('.option-all__song-slider-img');
 const headerSetting = $('.header__setting');
@@ -46,14 +47,14 @@ const app = {
             name: 'Chạy Về Khóc Với Anh',
             singer: 'Erik, Duzme Remix',
             pathSong: './assests/music/list-song/1.mp3',
-            duration : '04:05',
+            duration : '03:26',
         },
         {
             background: './assests/img/songs/2.jpeg',
             name: 'Sẵn Sàng Yêu Em Đi Thôi',
             singer: 'Woni, Minh Tú, Đại Mèo Remix',
             pathSong: './assests/music/list-song/2.mp3',
-            duration : '03:51',
+            duration : '04:01',
         },
         {
             background: './assests/img/songs/3.webp',
@@ -67,21 +68,21 @@ const app = {
             name: 'Vui Lắm Nha',
             singer: 'Hương Ly, Jombie, RIN Music Remix',
             pathSong: './assests/music/list-song/4.m4a',
-            duration : '05:16',
+            duration : '05:25',
         },
         {
             background: './assests/img/songs/5.webp',
             name: 'Lưu Số Em Đi',
             singer: 'Huỳnh Văn, V.P. Tiên, Đại Mèo Remix',
             pathSong: './assests/music/list-song/5.m4a',
-            duration : '04:10',
+            duration : '05:42',
         },
         {
             background: './assests/img/songs/6.webp',
             name: 'Như Một Người Dưng',
             singer: 'Nguyễn Thạc Bảo Ngọc, Remix',
             pathSong: './assests/music/list-song/6.mp3',
-            duration : '05:05',
+            duration : '05:56',
         },
         {
             background: './assests/img/songs/7.webp',
@@ -95,56 +96,56 @@ const app = {
             name: 'Tình Yêu Ngủ Quên',
             singer: 'Hoàng Tôn, LyHan, Orinn Remix',
             pathSong: './assests/music/list-song/8.mp3',
-            duration : '04:27',
+            duration : '02:55',
         },
         {
             background: './assests/img/songs/9.webp',
             name: 'Không Bằng',
             singer: 'Na, RIN Music Remix',
             pathSong: './assests/music/list-song/9.m4a',
-            duration : '03:23',
+            duration : '04:00',
         },
         {
             background: './assests/img/songs/10.webp',
             name: 'Ai Chung Tình Được Mãi',
             singer: 'Đinh Tùng Huy, ACV Remix',
             pathSong: './assests/music/list-song/10.m4a',
-            duration : '03:55',
+            duration : '06:16',
         },
         {
             background: './assests/img/songs/11.webp',
             name: 'Cô Đơn Dành Cho Ai',
             singer: 'NAL, LEE KEN, Orinn Remix',
             pathSong: './assests/music/list-song/11.m4a',
-            duration : '04:45',
+            duration : '05:05',
         },
         {
             background: './assests/img/songs/12.webp',
             name: 'Ánh mắt ta chạm nhau',
             singer: 'Ngô Lan Hương, Đại Mèo remix',
             pathSong: './assests/music/list-song/12.m4a',
-            duration : '06:01',
+            duration : '05:12',
         },
         {
             background: './assests/img/songs/13.webp',
             name: '2 Phút Hơn',
             singer: 'Phao, KAIZ Remix',
             pathSong: './assests/music/list-song/13.m4a',
-            duration : '05:02',
+            duration : '04:20',
         },
         {
             background: './assests/img/songs/14.webp',
             name: 'Là Ai Từ Bỏ Là Ai Vô Tình',
             singer: 'Hương Ly, Jombie (G5R), RIN Music Remix',
             pathSong: './assests/music/list-song/14.m4a',
-            duration : '03:25',
+            duration : '04:57',
         },
         {
             background: './assests/img/songs/2.jpeg',
             name: 'Yêu Đừng Sợ Đau',
             singer: 'Ngô Lan Hương, Cukak Remix',
             pathSong: './assests/music/list-song/15.m4a',
-            duration : '03:51',
+            duration : '03:53',
         },
     ],
 
@@ -167,7 +168,7 @@ const app = {
                             <i class="fas fa-heart songs-item-right-heart-active"></i>
                             <i class="far fa-heart songs-item-right-heart-non active"></i>
                         </span>
-                        <span class="songs-item-right-duration">04:27</span>
+                        <span class="songs-item-right-duration">${song.duration}</span>
                     </div>
                 </li>
             `
@@ -210,11 +211,16 @@ const app = {
         remainTime.textContent = this.formatTime(audio.currentTime);
     },
 
+    displayDurationTime : function() {
+        durationTime.textContent = this.currentSong.duration;
+    },
+
     loadCurrentSong: function() {
         musicControlLeftImg.style.backgroundImage = `url(${this.currentSong.background})`;
         musicControlLeftContentSong.textContent = this.currentSong.name;
         musicControlLeftContentSinger.textContent = this.currentSong.singer;
         audio.src = this.currentSong.pathSong;
+        this.displayDurationTime();
     },
     
     nextSong: function() {

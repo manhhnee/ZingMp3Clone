@@ -202,16 +202,16 @@
                     </div>
                     <div class="music__option">
                         <ul class="music__option-list">
-                            <li class="music__option-item active">Tổng quan</li>
-                            <li class="music__option-item">Bài hát</li>
-                            <li class="music__option-item">Playlist</li>
-                            <li class="music__option-item">Nghệ sĩ</li>
-                            <li class="music__option-item">
+                            <li class="music__option-item tabs-item active">Tổng quan</li>
+                            <li class="music__option-item tabs-item">Bài hát</li>
+                            <li class="music__option-item tabs-item">Playlist</li>
+                            <li class="music__option-item tabs-item">Nghệ sĩ</li>
+                            <li class="music__option-item js__toast">
                                 <i class="fas fa-ellipsis-h"></i>
                             </li>
                         </ul>
                     </div>
-                    <div class="option__all">
+                    <div class="option__all panes-item active">
                         <div class="option__all-song option__all-margin-bot">
                             <div class="option-heading">
                                 <h3 class="option-heading-name">Bài hát</h3>
@@ -497,9 +497,31 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="option-music panes-item">
+                        <div class="option-heading">
+                            <h3 class="option-heading-name">Bài hát</h3>
+                            <div class="option-all__song-heading-right">
+                                <div class="btn option-all__song-heading-right-upload hover">
+                                    <i class="fas fa-upload"></i>
+                                    Tải lên
+                                </div>
+                                <div class="btn option-all__song-heading-right-playall hover">
+                                    <i class="fas fa-play"></i>
+                                    Phát tất cả
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid row">
+                            <ul class="option-music-list songs-list">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="option-playlist panes-item"></div>
+                    <div class="option-singer panes-item"></div>
                 </div>
 
-                <div class="main-container-dicover js__container-panes">
+                <div class="main-container-dicover js__container-panes" style="display: none;">
                     <div class="container-discover__playlist option__all-margin-bot">
                         <ul class="option__all-playlist-list">
                             <div class="row">

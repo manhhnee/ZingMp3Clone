@@ -20,12 +20,14 @@ const headerOverlay = $('.header__right-overlay');
 const headerSettingList = $('.header__setting-list');
 const volumeIcon = $('.music-control__right-volume-icon');
 const volumeProgress = $('#progress1');
+const tabs = $$('.tabs-item');
+const panes = $$('.panes-item');
 
 const sideBars = $$('.sidebar__item');
 const containerPanes = $$('.js__container-panes');
 
 
-
+var backgroundIndex= 0;
 
 const app = {
     currentIndex: 0,
@@ -149,12 +151,16 @@ const app = {
         },
     ],
 
-    renderSongsItem: function() {
+    renderSongsItemAll: function() {
         const htmls = this.songsData.map((song, index) => {
             return `
-                <li class="songs-item ${index === this.currentIndex ? 'songs-item--active' : ''}" data-index=${index}>
+                <li class="songs-item ${index === this.currentIndex ? 'songs-item--active play-btn--active' : ''}" data-index=${index}>
                     <div class="songs-item-left">
-                        <div style="background-image: url(${song.background});" class="songs-item-left-img"></div>
+                        <div style="background-image: url(${song.background});" class="songs-item-left-img">
+                            <div class="songs-item-left-img-playbtn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
                         <div class="songs-item-left-body">
                             <h3 class="songs-item-left-body-name">${song.name}</h3>
                             <span class="songs-item-left-body-singer">${song.singer}</span>
@@ -174,6 +180,37 @@ const app = {
             `
         })
         $('.option-all__songs-list').innerHTML = htmls.join('');
+    },
+
+    renderSongItemMusic: function() {
+        const htmls = this.songsData.map((song, index) => {
+            return `
+                <li class="songs-item ${index === this.currentIndex ? 'songs-item--active play-btn--active' : ''}">
+                    <div class="songs-item-left">
+                        <div class="songs-item-left-img " style="background-image: url(${song.background});">
+                            <div class="songs-item-left-img-playbtn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="songs-item-left-body">
+                            <h3 class="songs-item-left-body-name">${song.name}</h3>
+                            <span class="songs-item-left-body-singer">${song.singer}</span>
+                        </div>
+                    </div>
+                    <div class="songs-item-center">
+                        <span>Anh Đã Lạc Vào (Remix)</span>
+                    </div>
+                    <div class="songs-item-right">
+                        <span class="songs-item-right-heart">
+                            <i class="fas fa-heart songs-item-right-heart-active"></i>
+                            <i class="far fa-heart songs-item-right-heart-non active"></i>
+                        </span>
+                        <div class="songs-item-right-duration">${song.duration}</div>
+                    </div>
+                </li>
+            `
+        })
+        $('.option-music-list').innerHTML = htmls.join('');
     },
 
     defineProperties: function() {
@@ -442,12 +479,30 @@ const app = {
                 _this.isMute = false;
             }
         }
+
+        tabs.forEach((tab, index) => {
+            const pane = panes[index];
+            $('.panes-item:not(.active)').style.backgroundColor = 'transparent';
+            tab.onclick = function() {
+                $('.music__option-item.active').classList.remove('active');
+                tab.classList.add('active');
+                $('.panes-item.active').classList.remove('active');
+                tabs[0].style.backgroundColor = 'transparent';
+                tabs[1].style.backgroundColor = 'transparent';
+                tabs[2].style.backgroundColor = 'transparent';
+                tabs[3].style.backgroundColor = 'transparent';
+                tab.style.backgroundColor = `var(--option-color-${backgroundIndex})`;
+                pane.classList.add('active');
+            }
+        })
  
     },
     
 
     start: function() {
-        this.renderSongsItem();
+        this.renderSongsItemAll();
+
+        this.renderSongItemMusic();
         
         this.defineProperties();
 
